@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    @apply overflow-x-hidden bg-black text-white  scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-blue-500;
+}
+
+::selection {
+    background-color: #081741;
+    color: #3b82f6;
+}
+
+input,
+textarea {
+    @apply resize-none  rounded-t bg-white bg-opacity-25 px-3 py-2 outline-none focus:border-b focus:border-b-white;
+}
+
+input,
+textarea {
+    @apply resize-none  rounded-t bg-white bg-opacity-25 px-3 py-2 outline-none focus:border-b focus:border-b-white;
+}
+
+@layer base {
+    h1 {
+        @apply text-3xl font-bold md:text-5xl;
+    }
+
+    h2 {
+        @apply text-2xl font-bold md:text-4xl;
+    }
+
+    h3 {
+        @apply text-xl font-bold md:text-3xl;
+    }
+
+    h4 {
+        @apply text-lg font-bold md:text-2xl;
+    }
+}
