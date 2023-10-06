@@ -20,7 +20,7 @@ const ScrollbarProgress = () => {
     }, [])
 
     return (
-        <div className={merge('sticky left-0 right-0 top-0 z-50 h-2.5 w-full ')}>
+        <div className={merge('sticky left-0 right-0 top-0 z-50 w-full ')}>
             <div className={merge('h-1 bg-white ')} style={{ width: `${scrollTop}%` }} />
         </div>
     )
