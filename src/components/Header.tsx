@@ -13,6 +13,9 @@ const HEADER_MENU = [
 
 export default function Header() {
     const pathname = usePathname()
+    const splitPath = pathname ? pathname.split('/') : []
+    const baseRoute = splitPath.length > 1 ? '/' + splitPath[1] : '/'
+
     return (
         <header className="fixed z-30 flex w-full items-center justify-start bg-white bg-opacity-0 p-2.5 shadow backdrop-blur-md max-md:gap-16">
             <div className="inline-flex items-center gap-4">
@@ -22,9 +25,9 @@ export default function Header() {
                             key={i}
                             href={item.href}
                             className={merge(
-                                pathname == item.href
+                                baseRoute == item.href
                                     ? 'rounded border-0 bg-blue-700 bg-opacity-30 px-2 py-1 text-blue-500 after:bg-blue-500 after:hover:w-0'
-                                    : ''
+                                    : null
                             )}
                         >
                             {item.label}

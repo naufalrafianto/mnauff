@@ -17,7 +17,7 @@ interface Meta {
     demo: string | null
     tags: string
     stack: string[]
-    date: Date
+    date: string
     thumbnail: string
 }
 

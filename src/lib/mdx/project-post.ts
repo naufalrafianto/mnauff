@@ -1,5 +1,9 @@
+import TechStackIcon from '@/components/TechStackIcon'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { serialize } from 'next-mdx-remote/serialize'
+
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 
 export async function getPostByName(filename: string): Promise<PostProps | undefined> {
     try {
@@ -32,6 +36,21 @@ export async function getPostByName(filename: string): Promise<PostProps | undef
             stack: string[]
         }>({
             source: rawMDX,
+            components: { TechStackIcon },
+            options: {
+                parseFrontmatter: true,
+                mdxOptions: {
+                    rehypePlugins: [
+                        rehypeSlug,
+                        [
+                            rehypeAutolinkHeadings,
+                            {
+                                behavior: 'wrap',
+                            },
+                        ],
+                    ],
+                },
+            },
         })
 
         const serialized = await serialize(rawMDX, {
@@ -65,7 +84,7 @@ export async function getPostByName(filename: string): Promise<PostProps | undef
 
 export async function getPostMeta(): Promise<Meta[] | undefined> {
     try {
-        const res = await fetch('https://api.github.com/repos/mnauff/mdx-for-mnauff/git/trees/main?recursive=1', {
+        const res = await fetch(process.env.NEXT_PUBLIC_GITHUB_API_URL as string, {
             headers: {
                 Accept: 'application/vnd.github+json',
                 Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_API_TOKEN}`,

@@ -38,3 +38,79 @@ textarea {
         @apply text-lg font-bold md:text-2xl;
     }
 }
+
+.prose {
+    max-width: 50rem;
+}
+
+.prose a {
+    text-decoration: none;
+}
+
+.prose > ol > li > :last-child,
+.prose > ul > li > :last-child {
+    margin-bottom: 0;
+}
+.prose > ol > li > :first-child,
+.prose > ul > li > :first-child {
+    margin-top: 0;
+}
+
+.prose blockquote p:first-of-type::before,
+.prose blockquote p:last-of-type::after {
+    content: '';
+}
+
+.prose blockquote {
+    border-style: solid;
+    border-width: 0 0 0 0.25rem;
+    border-color: #3b82f6;
+}
+
+.prose hr {
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: #3b82f6;
+}
+
+.mdx.prose :where(h1, h2, h3, h4) {
+    scroll-margin-top: 100px;
+    position: relative;
+    display: block;
+    margin-right: 0.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.mdx.prose :where(h1, h2, h3, h4) > a {
+    border-bottom: none;
+}
+
+/* Custom Heading Style for Projects */
+.mdx.prose.projects blockquote {
+    font-style: normal;
+}
+.mdx.prose.projects blockquote:first-of-type h2 {
+    margin-top: 1rem;
+}
+.mdx.prose.projects blockquote.with-icons h2 {
+    margin-bottom: 0;
+}
+
+/* Apply shadow to Youtube Embed */
+.mdx.prose .yt-lite {
+    @apply overflow-hidden rounded shadow-sm dark:shadow-none;
+}
+
+/* #region  /**=========== Hash Anchor =========== */
+.hash-anchor {
+    @apply inset-y-0 w-full;
+    position: absolute;
+    background-image: none;
+    transition: none;
+}
+
+.hash-anchor:hover {
+    background-color: #3b82f6;
+    background-size: 100% 2px;
+}

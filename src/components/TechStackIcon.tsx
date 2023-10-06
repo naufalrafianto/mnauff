@@ -6,7 +6,7 @@ import { StyledLink } from './ui/link/Link'
 import { merge } from '@/lib/merge'
 
 type TechStackItem = {
-    Tech: string[]
+    Tech: string[] | undefined // Ensure Tech is an array or undefined
     IconSize: string
     color: string
     showTooltip: boolean

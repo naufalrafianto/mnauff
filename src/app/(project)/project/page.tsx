@@ -1,23 +1,25 @@
 import Content from '@/container/ContentContainer'
 import StarsContainer from '@/container/StarsContainer'
 import React from 'react'
-import AnimationData from '~/assets/lottie/404/page_not_found.json'
-import { StyledLink } from '@/components/ui/link/Link'
-import { Heading } from '@/components/ui/Heading'
 import { Metadata } from 'next'
-import LottiePlayer from '@/components/Lottie'
+import { getPostMeta } from '@/lib/mdx/project-post'
+import ProjectCard from '@/components/ui/ProjectCard'
+import { merge } from '@/lib/merge'
 
 export const metadata: Metadata = {
-    title: 'Page not Found',
+    title: 'Project',
 }
-const Page = () => {
+const Page = async () => {
+    const posts = await getPostMeta()
+
     return (
         <StarsContainer className="h-screen">
-            <Content size="default">
-                <LottiePlayer AnimationData={AnimationData} />
-                <div className="text-center">
-                    <Heading>The page that you access is not found</Heading>
-                    <StyledLink href="/">Please back on track</StyledLink>
+            <Content size="default" className="pt-20">
+                <h1 className={merge('rounded bg-blue-700/30 p-2.5 text-blue-500', 'text-start font-black uppercase')}>
+                    Project
+                </h1>
+                <div className="flex flex-col items-center gap-5 p-5 md:flex-row md:flex-wrap">
+                    <ProjectCard posts={posts} />
                 </div>
             </Content>
         </StarsContainer>
