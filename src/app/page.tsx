@@ -78,8 +78,11 @@ export default async function Home() {
                     >
                         Recent Projects
                     </h1>
-                    {/* @ts-expect-error Server Component */}
-                    <LatestProject />
+                    <React.Suspense fallback={<p>Loading feed...</p>}>
+                        {/* @ts-expect-error Server Component */}
+
+                        <LatestProject />
+                    </React.Suspense>
                     <UnstyledLink href="/project">
                         <Button type="button" className="gap-2 px-3 py-2" color="second">
                             <span>Discover more</span>

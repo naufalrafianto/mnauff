@@ -3,13 +3,15 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { merge } from '@/lib/merge'
-import { PointMaterial, Points, Preload } from '@react-three/drei'
+import { PointMaterial, Points } from '@react-three/drei'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as random from 'maath/random/dist/maath-random.cjs'
 import * as React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import ScrollbarProgress from '@/components/ScrollProgress'
+import Loading from '@/app/loading'
 
-function Stars({ ...props }) {
+function Star({ ...props }) {
     const ref = React.useRef<THREE.Points>(null)
     const [sphere] = React.useState(() => Float32Array.from(random.inSphere(new Float32Array(2500), { radius: 1.2 })))
     useFrame((state, delta) => {
@@ -30,13 +32,10 @@ function Stars({ ...props }) {
 
 export default function StarsContainer({ children, className }: { children: React.ReactNode; className: string }) {
     return (
-        <main className={merge('relative inset-0 w-screen', className)}>
+        <main className={merge('relative inset-0 min-h-screen w-screen', className)}>
             <div className="absolute -z-10 h-full w-full">
                 <Canvas camera={{ position: [0, 0, 1] }}>
-                    <React.Suspense fallback={null}>
-                        <Stars />
-                    </React.Suspense>
-                    <Preload all />
+                    <Star />
                 </Canvas>
             </div>
             <AnimatePresence mode="wait" initial={true}>
@@ -47,8 +46,9 @@ export default function StarsContainer({ children, className }: { children: Reac
                     transition={{ duration: 1, ease: 'easeInOut' }}
                     className="mx-auto min-h-screen max-w-4xl shadow backdrop-blur-[2px]"
                 >
+                    <ScrollbarProgress />
                     <Header />
-                    <>{children}</>
+                    <React.Suspense fallback={<Loading />}>{children}</React.Suspense>
                     <Footer />
                 </motion.div>
             </AnimatePresence>

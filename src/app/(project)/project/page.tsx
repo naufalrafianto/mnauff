@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { getPostMeta } from '@/lib/mdx/project-post'
 import ProjectCard from '@/components/ui/ProjectCard'
 import { merge } from '@/lib/merge'
+import Loading from '@/app/loading'
 
 export const metadata: Metadata = {
     title: 'Project',
@@ -19,7 +20,9 @@ const Page = async () => {
                     Project
                 </h1>
                 <div className="flex flex-col items-center gap-5 p-5 md:flex-row md:flex-wrap">
-                    <ProjectCard posts={posts} />
+                    <React.Suspense fallback={<Loading />}>
+                        <ProjectCard posts={posts} />
+                    </React.Suspense>
                 </div>
             </Content>
         </StarsContainer>

@@ -12,6 +12,7 @@ import { StyledLink } from '@/components/ui/link/Link'
 
 import { GoBrowser } from 'react-icons/go'
 import { BsGithub } from 'react-icons/bs'
+import CurrentPage from '@/components/ui/CurrentPage'
 
 export const revalidate = 10
 
@@ -54,8 +55,9 @@ const Page = async ({ params: { id } }: Props) => {
     const setDate = new Date(meta.date)
 
     return (
-        <StarsContainer className="h-screen">
+        <StarsContainer className="">
             <section className={merge('w-full border-b border-b-white/25 p-10 pt-20', 'flex flex-col gap-2.5')}>
+                <CurrentPage />
                 <div className="w-full ">
                     <Image
                         width={1000}
