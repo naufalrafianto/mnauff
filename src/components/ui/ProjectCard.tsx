@@ -1,10 +1,10 @@
 'use client'
 import React from 'react'
-import Image from 'next/image'
 import { UnstyledLink } from './link/Link'
 import { merge } from '@/lib/merge'
 import TechStackIcon from '../TechStackIcon'
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
+import CloudImg from './CloudImg'
 
 type CardProps = {
     posts: Meta[] | undefined
@@ -28,12 +28,12 @@ const ProjectCard: React.FC<CardProps> = ({ posts }) => {
                             )}
                         >
                             <div className="w-full">
-                                <Image
+                                <CloudImg
+                                    className="rounded-t object-contain"
+                                    src={item.thumbnail}
+                                    alt="Card image"
                                     width={500}
                                     height={500}
-                                    alt=""
-                                    src={`https://res.cloudinary.com/des4tnjej/image/upload${item.thumbnail}`}
-                                    className="rounded-t object-contain"
                                 />
                             </div>
                             <div
@@ -42,7 +42,7 @@ const ProjectCard: React.FC<CardProps> = ({ posts }) => {
                                     'bg-white text-black'
                                 )}
                             >
-                                <h4 className="text-lg">{item.title}</h4>
+                                <h4 className="text-xl">{item.title}</h4>
                                 <TechStackIcon
                                     color="text-black hover:text-blue-500"
                                     key={i}
@@ -52,8 +52,9 @@ const ProjectCard: React.FC<CardProps> = ({ posts }) => {
                                 />
                             </div>
 
-                            <p className="border-b border-dashed border-b-white p-2.5 text-sm">{item.desc}</p>
-                            <div className="hover:text-custom-orange inline-flex items-center gap-2.5 p-2.5 group-hover:text-blue-500 group-hover:underline">
+                            <p className="border-b border-dashed border-b-white p-2.5 text-base">{item.desc}</p>
+
+                            <div className="inline-flex items-center gap-2.5 p-2.5 group-hover:text-blue-500 group-hover:underline">
                                 <span>See more</span>
                                 <HiOutlineArrowNarrowRight />
                             </div>

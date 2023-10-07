@@ -1,5 +1,3 @@
-import Content from '@/container/ContentContainer'
-import StarsContainer from '@/container/StarsContainer'
 import React from 'react'
 
 import { getPostByName, getPostMeta } from '@/lib/mdx/project-post'
@@ -13,6 +11,8 @@ import { StyledLink } from '@/components/ui/link/Link'
 import { GoBrowser } from 'react-icons/go'
 import { BsGithub } from 'react-icons/bs'
 import CurrentPage from '@/components/ui/CurrentPage'
+import StarsContainer from '@/container/StarsContainer'
+import Article from '@/components/Article'
 
 export const revalidate = 10
 
@@ -32,7 +32,7 @@ export async function generateMetadata({ params: { id } }: Props) {
     }
 
     return {
-        title: post.meta.title,
+        title: post.postObj.meta.title,
     }
 }
 
@@ -50,7 +50,7 @@ const Page = async ({ params: { id } }: Props) => {
     const post = await getPostByName(`/project/${id}.mdx`)
     if (!post) notFound()
 
-    const { meta, content } = post
+    const { meta, content } = post.postObj
     const date = getFormattedDate(meta.date)
     const setDate = new Date(meta.date)
 
@@ -93,9 +93,10 @@ const Page = async ({ params: { id } }: Props) => {
                     </div>
                 </div>
             </section>
-            <Content size="default">
-                <article className="mdx prose prose-invert prose-h2:font-black">{content}</article>
-            </Content>
+            <Article content={content} />
+            {/* <aside className="fixed right-0 top-80 -translate-y-1/2 bg-red-500">
+                <TableOfContents node={post.headings} />
+            </aside> */}
         </StarsContainer>
     )
 }

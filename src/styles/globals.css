@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    @apply overflow-x-hidden bg-black text-white  scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-blue-500;
+    @apply overflow-x-hidden scroll-smooth bg-black  text-white scrollbar-thin scrollbar-track-slate-800 scrollbar-thumb-blue-500;
 }
 
 ::selection {
@@ -84,6 +84,7 @@ textarea {
 
 .mdx.prose :where(h1, h2, h3, h4) > a {
     border-bottom: none;
+    font-weight: 700; /* bold */
 }
 
 /* Custom Heading Style for Projects */
@@ -98,19 +99,3 @@ textarea {
 }
 
 /* Apply shadow to Youtube Embed */
-.mdx.prose .yt-lite {
-    @apply overflow-hidden rounded shadow-sm dark:shadow-none;
-}
-
-/* #region  /**=========== Hash Anchor =========== */
-.hash-anchor {
-    @apply inset-y-0 w-full;
-    position: absolute;
-    background-image: none;
-    transition: none;
-}
-
-.hash-anchor:hover {
-    background-color: #3b82f6;
-    background-size: 100% 2px;
-}

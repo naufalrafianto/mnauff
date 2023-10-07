@@ -19,7 +19,7 @@ const Page = async () => {
                 <h1 className={merge('rounded bg-blue-700/30 p-2.5 text-blue-500', 'text-start font-black uppercase')}>
                     Project
                 </h1>
-                <div className="flex flex-col items-center gap-5 p-5 md:flex-row md:flex-wrap">
+                <div className="grid grid-cols-2 gap-5 p-5 md:flex-row md:flex-wrap">
                     <React.Suspense fallback={<Loading />}>
                         <ProjectCard posts={posts} />
                     </React.Suspense>

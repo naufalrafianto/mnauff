@@ -2,6 +2,7 @@ import '@/styles/globals.css'
 import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import * as React from 'react'
+import NextTopLoader from 'nextjs-toploader'
 
 const font = Montserrat({ subsets: ['latin'], weight: ['400', '700', '900'] })
 
@@ -44,7 +45,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={font.className}>{children}</body>
+            <body className={font.className}>
+                <NextTopLoader
+                    color="#2299DD"
+                    initialPosition={0.08}
+                    crawlSpeed={200}
+                    height={3}
+                    crawl={true}
+                    showSpinner={true}
+                    easing="ease"
+                    speed={200}
+                    shadow="0 0 10px #2299DD,0 0 5px #2299DD"
+                />
+                {children}
+            </body>
         </html>
     )
 }

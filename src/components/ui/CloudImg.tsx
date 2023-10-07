@@ -11,16 +11,13 @@ type CloudImg = {
 
 const CloudImg: React.FC<CloudImg> = ({ height, width, alt, src, className }) => {
     return (
-        <>
-            <Image
-                src={`https://res.cloudinary.com/des4tnjej/image/upload${src}`}
-                alt={alt}
-                sizes=""
-                height={height}
-                width={width}
-                className={className}
-            />
-        </>
+        <Image
+            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}${src}`}
+            alt={alt}
+            height={height}
+            width={width}
+            className={className}
+        />
     )
 }
 

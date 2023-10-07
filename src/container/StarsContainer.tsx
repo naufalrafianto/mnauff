@@ -9,7 +9,6 @@ import * as random from 'maath/random/dist/maath-random.cjs'
 import * as React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import ScrollbarProgress from '@/components/ScrollProgress'
-import Loading from '@/app/loading'
 
 function Star({ ...props }) {
     const ref = React.useRef<THREE.Points>(null)
@@ -32,9 +31,9 @@ function Star({ ...props }) {
 
 export default function StarsContainer({ children, className }: { children: React.ReactNode; className: string }) {
     return (
-        <main className={merge('relative inset-0 min-h-screen w-screen', className)}>
+        <main className={merge('min-h-screen w-screen', className)}>
             <div className="absolute -z-10 h-full w-full">
-                <Canvas camera={{ position: [0, 0, 1] }}>
+                <Canvas camera={{ position: [0, 0, 1] }} style={{ width: '100%' }}>
                     <Star />
                 </Canvas>
             </div>
@@ -44,11 +43,11 @@ export default function StarsContainer({ children, className }: { children: Reac
                     animate={{ opacity: 1, x: 0, y: 0 }}
                     exit={{ opacity: 0, x: 0, y: 100 }}
                     transition={{ duration: 1, ease: 'easeInOut' }}
-                    className="mx-auto min-h-screen max-w-4xl shadow backdrop-blur-[2px]"
+                    className="mx-auto min-h-screen max-w-4xl shadow backdrop-blur-lg"
                 >
                     <ScrollbarProgress />
                     <Header />
-                    <React.Suspense fallback={<Loading />}>{children}</React.Suspense>
+                    <>{children}</>
                     <Footer />
                 </motion.div>
             </AnimatePresence>
