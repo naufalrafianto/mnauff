@@ -17,7 +17,13 @@ export default function Header() {
     const baseRoute = splitPath.length > 1 ? '/' + splitPath[1] : '/'
 
     return (
-        <header className="fixed z-30 flex w-full items-center justify-start bg-white bg-opacity-0 p-2.5 shadow backdrop-blur-md max-md:gap-16">
+        <header
+            className={merge(
+                'fixed z-30',
+                'inline-flex w-full items-center justify-start bg-opacity-0 shadow backdrop-blur-md',
+                'px-2.5 py-2.5 md:px-10'
+            )}
+        >
             <div className="inline-flex items-center gap-4">
                 {HEADER_MENU.map((item, i) => {
                     return (

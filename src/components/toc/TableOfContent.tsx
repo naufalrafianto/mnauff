@@ -4,7 +4,7 @@ import TOCLink from './TocLink'
 
 const TableOfContents: React.FC<TocProps> = ({ node }) => {
     return (
-        <div className="max-md:none">
+        <div className="sticky top-20">
             <h2 className="text-xl font-semibold">Table of Contents</h2>
             <ul className="mt-2">
                 <li className="mb-2">

@@ -6,7 +6,7 @@ const LatestProject = async () => {
     const latestPosts = await getFeaturedPosts()
 
     return (
-        <div className="grid grid-cols-1 gap-5 px-5 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 px-10 md:grid-cols-2">
             <ProjectCard posts={latestPosts} />
         </div>
     )

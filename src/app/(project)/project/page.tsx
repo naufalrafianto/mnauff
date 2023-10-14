@@ -14,12 +14,12 @@ const Page = async () => {
     const posts = await getPostMeta()
 
     return (
-        <StarsContainer className="h-screen">
+        <StarsContainer>
             <Content size="default" className="pt-20">
                 <h1 className={merge('rounded bg-blue-700/30 p-2.5 text-blue-500', 'text-start font-black uppercase')}>
                     Project
                 </h1>
-                <div className="grid grid-cols-2 gap-5 p-5 md:flex-row md:flex-wrap">
+                <div className="grid grid-cols-1 gap-5 p-5 md:grid-cols-2">
                     <React.Suspense fallback={<Loading />}>
                         <ProjectCard posts={posts} />
                     </React.Suspense>

@@ -11,8 +11,8 @@ import { StyledLink } from '@/components/ui/link/Link'
 import { GoBrowser } from 'react-icons/go'
 import { BsGithub } from 'react-icons/bs'
 import CurrentPage from '@/components/ui/CurrentPage'
-import StarsContainer from '@/container/StarsContainer'
 import Article from '@/components/Article'
+import PostContainer from '@/container/PostContainer'
 
 export const revalidate = 10
 
@@ -55,10 +55,12 @@ const Page = async ({ params: { id } }: Props) => {
     const setDate = new Date(meta.date)
 
     return (
-        <StarsContainer className="">
-            <section className={merge('w-full border-b border-b-white/25 p-10 pt-20', 'flex flex-col gap-2.5')}>
+        <PostContainer>
+            <section
+                className={merge('w-full border-b border-b-white/25 ', 'p-2.5 pt-20 md:p-10', 'flex flex-col gap-2.5')}
+            >
                 <CurrentPage />
-                <div className="w-full ">
+                <div className="mx-auto w-full">
                     <Image
                         width={1000}
                         height={1000}
@@ -67,7 +69,7 @@ const Page = async ({ params: { id } }: Props) => {
                         className="rounded border-2 border-white object-contain"
                     />
                 </div>
-                <h3>{meta.title}</h3>
+                <div className="text-xl font-bold md:text-3xl">{meta.title}</div>
                 <p>{meta.desc}</p>
                 <div>
                     <span>Created </span>
@@ -93,11 +95,8 @@ const Page = async ({ params: { id } }: Props) => {
                     </div>
                 </div>
             </section>
-            <Article content={content} />
-            {/* <aside className="fixed right-0 top-80 -translate-y-1/2 bg-red-500">
-                <TableOfContents node={post.headings} />
-            </aside> */}
-        </StarsContainer>
+            <Article content={content} node={post.headings} />
+        </PostContainer>
     )
 }
 

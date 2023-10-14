@@ -3,6 +3,9 @@ import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import * as React from 'react'
 import NextTopLoader from 'nextjs-toploader'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import ScrollbarProgress from '@/components/ScrollProgress'
 
 const font = Montserrat({ subsets: ['latin'], weight: ['400', '700', '900'] })
 
@@ -51,13 +54,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     initialPosition={0.08}
                     crawlSpeed={200}
                     height={3}
+                    showSpinner={false}
                     crawl={true}
-                    showSpinner={true}
                     easing="ease"
                     speed={200}
                     shadow="0 0 10px #2299DD,0 0 5px #2299DD"
                 />
+                <ScrollbarProgress />
+                <Header />
                 {children}
+                <Footer />
             </body>
         </html>
     )

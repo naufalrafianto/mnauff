@@ -14,7 +14,7 @@ type TechStackItem = {
 
 export default function TechStackIcon(props: TechStackItem) {
     return (
-        <div className="flex gap-2.5">
+        <div className="flex gap-5">
             {TECH_STACK.map((item) => {
                 const Icon = item.icon
                 if (props.Tech?.includes(item.id)) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import debounce from 'lodash/debounce' // Import lodash debounce function
+import throttle from 'lodash/throttle' // Import lodash throttle function
 
 type UseHighlightedReturnType = [boolean, React.Dispatch<React.SetStateAction<string>>]
 
@@ -17,20 +17,20 @@ export default function useHighlighted(id: string): UseHighlightedReturnType {
         }
 
         observer.current = new IntersectionObserver(handleObserver, {
-            rootMargin: '0% 0% -10% 0px',
+            rootMargin: '-25% 0% -50% 0px',
         })
 
         const elements = document.querySelectorAll('h2, h3, h4')
         elements.forEach((elem) => observer.current?.observe(elem))
 
-        // Debounce setActiveId to make it more sensitive
-        const debouncedSetActiveId = debounce((newActiveId: string) => {
+        // Replace lodash debounce with lodash throttle
+        const throttledSetActiveId = throttle((newActiveId: string) => {
             setActiveId(newActiveId)
-        }, 100) // Adjust the debounce delay as needed
+        }, 0) // Adjust the throttle delay as needed
 
         return () => {
             observer.current?.disconnect()
-            debouncedSetActiveId.cancel() // Cancel debouncedSetActiveId when unmounting
+            throttledSetActiveId.cancel() // Cancel throttledSetActiveId when unmounting
         }
     }, [])
 
