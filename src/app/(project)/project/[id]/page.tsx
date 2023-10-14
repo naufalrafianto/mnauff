@@ -99,7 +99,7 @@ const Page = async ({ params: { id } }: Props) => {
                 </div>
             </section>
             <Article content={content} node={post.headings} />
-            <UnstyledLink href="https://www.linkedin.com/in/naufal-rafianto-4159a8206/" className="mx-auto">
+            <UnstyledLink href="/contact" className="mx-auto">
                 <Button type="button" className="gap-2 px-3 py-2" color="second">
                     <span>Contact me</span>
                     <AiOutlineMail fontSize={16} />
