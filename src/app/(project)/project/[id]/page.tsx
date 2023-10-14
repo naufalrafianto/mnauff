@@ -6,13 +6,15 @@ import Image from 'next/image'
 import { merge } from '@/lib/merge'
 import getFormattedDate from '@/lib/mdx/formated-date'
 import TimeAgoComponent from '@/components/ui/TimeAgo'
-import { StyledLink } from '@/components/ui/link/Link'
+import { StyledLink, UnstyledLink } from '@/components/ui/link/Link'
 
 import { GoBrowser } from 'react-icons/go'
 import { BsGithub } from 'react-icons/bs'
 import CurrentPage from '@/components/ui/CurrentPage'
 import Article from '@/components/Article'
 import PostContainer from '@/container/PostContainer'
+import Button from '@/components/ui/button/Button'
+import { AiOutlineMail } from 'react-icons/ai'
 
 export const revalidate = 10
 
@@ -48,6 +50,7 @@ export async function generateStaticParams() {
 
 const Page = async ({ params: { id } }: Props) => {
     const post = await getPostByName(`/project/${id}.mdx`)
+
     if (!post) notFound()
 
     const { meta, content } = post.postObj
@@ -72,11 +75,11 @@ const Page = async ({ params: { id } }: Props) => {
                 <div className="text-xl font-bold md:text-3xl">{meta.title}</div>
                 <p>{meta.desc}</p>
                 <div>
-                    <span>Created </span>
-                    <TimeAgoComponent date={setDate} />
-                    <span>
-                        , <strong>{date}</strong>
-                    </span>
+                    Created{' '}
+                    <strong>
+                        <TimeAgoComponent date={setDate} />
+                    </strong>
+                    , {date}
                 </div>
                 <div className="inline-flex items-center gap-5">
                     <div className="inline-flex items-center gap-2.5">
@@ -96,6 +99,12 @@ const Page = async ({ params: { id } }: Props) => {
                 </div>
             </section>
             <Article content={content} node={post.headings} />
+            <UnstyledLink href="https://www.linkedin.com/in/naufal-rafianto-4159a8206/" className="mx-auto">
+                <Button type="button" className="gap-2 px-3 py-2" color="second">
+                    <span>Contact me</span>
+                    <AiOutlineMail fontSize={16} />
+                </Button>
+            </UnstyledLink>
         </PostContainer>
     )
 }

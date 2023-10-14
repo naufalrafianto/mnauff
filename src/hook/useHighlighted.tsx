@@ -17,7 +17,7 @@ export default function useHighlighted(id: string): UseHighlightedReturnType {
         }
 
         observer.current = new IntersectionObserver(handleObserver, {
-            rootMargin: '-25% 0% -50% 0px',
+            rootMargin: '0% 0% -50% 0px',
         })
 
         const elements = document.querySelectorAll('h2, h3, h4')
