@@ -10,7 +10,7 @@ I'm _Naufal_, a software developer and technology enthusiast.<br/>
 -   🛠️ \*-Tech Stack\*\*<br/>
     Here are some of the technologies and tools I've been working with:
 
-    -   **Languages**: JavaScript, TypeScript, Python
+    -   **Languages**: JavaScript, TypeScript, PHP
     -   **Frontend**: React.js, Next.js, HTML, CSS, Tailwind CSS
     -   **Backend**: Node.js, Express.js, Nest.js
     -   **Database**: MongoDB, PostgreSQL
