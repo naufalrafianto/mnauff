@@ -14,7 +14,11 @@ export const metadata: Metadata = {
         default: 'Home Page | MNR',
         template: '%s | MNR',
     },
-    description: 'Home page',
+    alternates: {
+        canonical: 'https://mnauff.vercel.app',
+    },
+    description:
+        'Personal website and blog by Muhammad Naufal Rafianto. Showcase of my projects, and some of my thoughts about technology.',
     icons: {
         icon: [
             {
@@ -43,6 +47,14 @@ export const metadata: Metadata = {
             type: 'image/png',
         },
     },
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        title: 'Muhammad Naufal Rafianto (mnauff)',
+        siteName: 'Muhammad Naufal Rafianto (mnauff)',
+        description:
+            'Personal website and blog by Muhammad Naufal Rafianto. Showcase of my projects, and some of my thoughts about technology.',
+    },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -60,9 +72,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     speed={200}
                     shadow="0 0 10px #2299DD,0 0 5px #2299DD"
                 />
-                <ScrollbarProgress />
                 <Header />
                 {children}
+                <ScrollbarProgress />
                 <Footer />
             </body>
         </html>

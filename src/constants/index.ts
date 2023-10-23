@@ -87,7 +87,7 @@ export const TECH_LINK = [
                 href: 'https://kinsta.com/knowledgebase/nestjs/',
             },
             {
-                label: 'NestJs Course for Beginners - Create a REST API',
+                label: 'NestJs Course for Beginners',
                 href: 'https://www.youtube.com/watch?v=GHTA143_b-s&t=2847s&pp=ygUGbmVzdGpz',
             },
         ],
