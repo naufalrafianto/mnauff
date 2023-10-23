@@ -41,7 +41,7 @@ export default function Header() {
                     )
                 })}
                 <div className={'inline-flex items-center gap-2'}>
-                    <StyledLink href="https://github.com/NaufalRafianto/mnr" className="after:bg-blue-500">
+                    <StyledLink href="https://github.com/mnauff/mnauff" className="after:bg-blue-500">
                         Source
                     </StyledLink>
                     <FaGithub />
