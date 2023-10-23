@@ -1,6 +1,6 @@
 <h1>Hey there!</h1> 👋
 
-I'm _Naufal_, a passionate software developer and technology enthusiast.<br/>
+I'm _Naufal_, a software developer and technology enthusiast.<br/>
 
 -   🚀 **About Me**
     -   💻 I love writing clean, efficient, and scalable code.
