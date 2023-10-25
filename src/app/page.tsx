@@ -9,16 +9,20 @@ import TechStackIcon from '@/components/TechStackIcon'
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { SiLinkedin } from 'react-icons/si'
 import LatestProject from '@/container/latest/LatestProject'
-import DotContainer from '@/components/dot/DotContainer'
+// import DotContainer from '@/components/dot/DotContainer'
+import Spotify from '@/components/Spotify'
 
 export default async function Home() {
     return (
         <StarsContainer className="flex flex-col">
             <Content
                 size="large"
-                className={merge('my-20 flex  flex-col items-center justify-center gap-10', 'md:flex-row')}
+                className={merge('flex flex-col items-center justify-center gap-2.5', 'md:my-20 md:flex-row md:gap-10')}
             >
-                <DotContainer />
+                {/* <DotContainer /> */}
+                <div className="md:hidden">
+                    <Spotify />
+                </div>
                 <div className={merge('mx-auto md:mx-0', 'text-center md:text-start')}>
                     <p className=" z-50 ">Wassup, I&apos;m</p>
                     <h1 className="z-50 text-8xl font-black text-white">Naufal</h1>

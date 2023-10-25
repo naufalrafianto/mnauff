@@ -4,6 +4,7 @@ import React from 'react'
 import { StyledLink } from './ui/link/Link'
 import { FaGithub } from 'react-icons/fa'
 import { merge } from '@/lib/merge'
+import Spotify from './Spotify'
 
 const HEADER_MENU = [
     { label: 'Home', href: '/' },
@@ -20,8 +21,8 @@ export default function Header() {
         <header
             className={merge(
                 'fixed z-30',
-                'inline-flex w-full items-center justify-start bg-opacity-0 shadow backdrop-blur-md',
-                'px-2.5 py-2.5 md:px-10'
+                'inline-flex w-full items-center justify-between bg-opacity-0 shadow backdrop-blur-md',
+                'px-2.5 md:px-10'
             )}
         >
             <div className="inline-flex items-center gap-4">
@@ -46,6 +47,9 @@ export default function Header() {
                     </StyledLink>
                     <FaGithub />
                 </div>
+            </div>
+            <div className="max-md:hidden">
+                <Spotify />
             </div>
         </header>
     )

@@ -4,8 +4,8 @@
 import React from 'react'
 import Lottie from 'lottie-react'
 
-const LottiePlayer = ({ AnimationData }: { AnimationData: any }) => {
-    return <Lottie animationData={AnimationData} />
+const LottiePlayer = ({ AnimationData, isPlay }: { AnimationData: any; isPlay?: boolean | undefined }) => {
+    return <Lottie animationData={AnimationData} disabled={isPlay} />
 }
 
 export default LottiePlayer
