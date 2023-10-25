@@ -9,7 +9,6 @@ import TechStackIcon from '@/components/TechStackIcon'
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { SiLinkedin } from 'react-icons/si'
 import LatestProject from '@/container/latest/LatestProject'
-// import DotContainer from '@/components/dot/DotContainer'
 import Spotify from '@/components/Spotify'
 
 export default async function Home() {
@@ -19,7 +18,6 @@ export default async function Home() {
                 size="large"
                 className={merge('flex flex-col items-center justify-center gap-2.5', 'md:my-20 md:flex-row md:gap-10')}
             >
-                {/* <DotContainer /> */}
                 <div className="md:hidden">
                     <Spotify />
                 </div>

@@ -1,7 +1,8 @@
 'use client'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import LottiePlayer from './Lottie'
+import useSWR from 'swr'
 
 import AnimationData from '~/assets/lottie/audio.json'
 import SpotifyLottie from '~/assets/lottie/spotify.json'
@@ -16,28 +17,22 @@ interface SpotifyData {
 }
 
 export default function Spotify() {
-    const [spotifyData, setSpotifyData] = useState<SpotifyData | null | undefined>(null)
+    const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-    useEffect(() => {
-        // Make a request to the Spotify API route
-        fetch('/api/spotify')
-            .then((response) => response.json())
-            .then((data) => setSpotifyData(data))
-            .catch((error) => console.error('Error:', error))
-    }, [spotifyData])
+    const { data } = useSWR<SpotifyData>('/api/spotify', fetcher)
 
     return (
         <main className="mx-auto inline-flex items-center">
             <div className="h-16 w-16">
-                <LottiePlayer AnimationData={SpotifyLottie} isPlay={!spotifyData?.isPlaying} />
+                <LottiePlayer AnimationData={SpotifyLottie} isPlay={!data?.isPlaying} />
             </div>
-            {spotifyData?.isPlaying ? (
+            {data?.isPlaying ? (
                 <section className="mx-auto inline-flex items-center gap-5">
                     <div>
                         <Image
                             width={40}
                             height={40}
-                            src={spotifyData?.albumImageUrl || ''}
+                            src={data?.albumImageUrl || ''}
                             alt="spotify album "
                             className="rounded border border-white"
                         />
@@ -47,9 +42,9 @@ export default function Spotify() {
                             <div className="h-5 w-5">
                                 <LottiePlayer AnimationData={AnimationData} />
                             </div>
-                            <strong>{spotifyData?.title}</strong>
+                            <strong>{data?.title}</strong>
                         </div>
-                        <p className="text-sm opacity-50">{spotifyData?.artist}</p>
+                        <p className="text-sm opacity-50">{data?.artist}</p>
                     </div>
                 </section>
             ) : (
