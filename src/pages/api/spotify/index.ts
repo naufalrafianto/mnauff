@@ -2,6 +2,8 @@ import axios from 'axios'
 import { NextApiRequest, NextApiResponse } from 'next'
 import querystring from 'querystring'
 
+export const runtime = 'edge'
+
 const client_id = process.env.SPOTIFY_CLIENT_ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET
 const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN
