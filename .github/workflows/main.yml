@@ -1,62 +1,74 @@
-name: 'Deploy to VPS'
-
+name: '[FE REPO SYNC]'
 on:
-  push:
-    branches:
-      - master
+    push:
+        branches:
+            - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+            - name: Install PM2
+              run: npm install -g pm2
 
-      - name: Install PM2
-        run: npm install -g pm2
+            - name: Install Dependencies
+              run: npm install
 
-      - name: Install Dependencies
-        run: npm install  # Changed from yarn install
+            - name: Build Frontend App
+              run: npm run build
 
-      - name: Build Frontend App
-        run: npm run build  # If you use a different npm script for building
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: artifact
+                  path: ./.next
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifact
-          path: .next
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v2
+              with:
+                  name: artifact
+                  path: ./.next
+            - name: Check Files
+              run: ls -la .
 
-  release:
-    needs: deploy
-    runs-on: ubuntu-latest
+            - name: Copy Build to Server via SSH
+              uses: appleboy/scp-action@v0.1.4
+              with:
+                  host: ${{ secrets.HOST }}
+                  port: ${{ secrets.PORT }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  source: .next/
+                  target: /var/www/mnauff/
 
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: artifact
-          path: .next
+    release:
+        needs: deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Release the App
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  port: ${{ secrets.PORT }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  script: |
+                      cd /var/www/mnauff
+                      git fetch
+                      git pull
+                      npm install
+                      pm2 restart BOF_FRONTEND
 
-      - name: Copy Build to Server via SCP
-        uses: wvanlit/scp-action@v1
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: .next/
-          target: /var/www/mnauff/
-
-      - name: SSH into Server and Restart PM2
-        uses: appleboy/ssh-action@v0.2.2
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd /var/www/mnauff
-            git fetch
-            git pull
-            npm install  # Change to npm for installing dependencies
-            pm2 restart BOF_FRONTEND
+            - name: Delete Artifact
+              uses: geekyeggo/delete-artifact@v2
+              with:
+                  name: artifact
