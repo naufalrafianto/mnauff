@@ -6,7 +6,7 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
 
-function generateTableOfContents(headings: Heading[]): TocNode[] {
+export function generateTableOfContents(headings: Heading[]): TocNode[] {
     const toc: TocNode[] = []
     let currentLevel = 2 // Assuming the initial level is 2 (h2).
 
@@ -184,25 +184,6 @@ export async function getPostMeta(): Promise<Meta[] | undefined> {
         return posts.sort((a, b) => (a.date < b.date ? 1 : -1))
     } catch (error) {
         console.error('Error fetching post metadata:', error)
-        return undefined
-    }
-}
-
-export async function getFeaturedPosts(): Promise<Meta[] | undefined> {
-    try {
-        const posts = await getPostMeta()
-
-        if (!posts) {
-            return undefined
-        }
-
-        const sortedPosts = posts.sort((a, b) => (a.date < b.date ? 1 : -1))
-
-        const featuredPosts = sortedPosts.slice(0, 3)
-
-        return featuredPosts
-    } catch (error) {
-        console.error('Error fetching featured posts:', error)
         return undefined
     }
 }

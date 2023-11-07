@@ -1,0 +1,73 @@
+name: 'Github Action'
+
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Install PM2
+              run: npm install -g pm2
+
+            - name: Install Dependencies
+              run: npm install
+
+            - name: Build Frontend App
+              run: npm run build
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: artifact
+                  path: ./.next
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Download Artifact
+              uses: actions/download-artifact@v2
+              with:
+                  name: artifact
+                  path: ./.next
+            - name: Check Files
+              run: ls -la .
+
+            - name: Copy Build to Server via SSH
+              uses: appleboy/scp-action@v0.1.4
+              with:
+                  host: 103.127.98.204
+                  port: ${{ secrets.PORT }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  source: .next/
+                  target: /var/www/personal-website/
+    release:
+        needs: deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Release the App
+              uses: appleboy/ssh-action@master
+              with:
+                  host: 103.127.98.204
+                  port: ${{ secrets.PORT }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  script: |
+                      cd /var/www/personal-website/
+                      git fetch
+                      git pull
+                      npm install
+                      pm2 restart BOF_FRONTEND
+
+            - name: Delete Artifact
+              uses: geekyeggo/delete-artifact@v2
+              with:
+                  name: artifact

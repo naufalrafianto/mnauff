@@ -1,5 +1,4 @@
 import Content from '@/container/ContentContainer'
-import StarsContainer from '@/container/StarsContainer'
 import * as React from 'react'
 import { StyledLink, UnstyledLink } from '@/components/ui/link/Link'
 import Button from '@/components/ui/button/Button'
@@ -8,12 +7,25 @@ import TechStackIcon from '@/components/TechStackIcon'
 
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi'
 import { SiLinkedin } from 'react-icons/si'
-import LatestProject from '@/container/latest/LatestProject'
 import Spotify from '@/components/Spotify'
+import ProjectCard from '@/components/ui/ProjectCard'
+import { getPostMeta } from '@/lib/mdx/project-post'
+import { Main } from '@/container/Main'
+import Tes from '@/components/tes'
+
+function getLatestPost(posts: Meta[] | undefined) {
+    return posts?.slice(0, 3)
+}
 
 export default async function Home() {
+    const latestPosts = await getPostMeta()
+    getLatestPost(latestPosts)
+
+    // console.log('Tes fetch api', tes)
+
     return (
-        <StarsContainer className="flex flex-col">
+        <Main className="flex flex-col">
+            <Tes />
             <Content
                 size="large"
                 className={merge('flex flex-col items-center justify-center gap-2.5', 'md:my-20 md:flex-row md:gap-10')}
@@ -24,7 +36,7 @@ export default async function Home() {
                 <div className={merge('mx-auto md:mx-0', 'text-center md:text-start')}>
                     <p className=" z-50 ">Wassup, I&apos;m</p>
                     <h1 className="z-50 text-8xl font-black text-white">Naufal</h1>
-                    <p className="z-50 max-md:text-sm">Fullstack Developer (Website / Mobile)</p>
+                    <p className="z-50 max-md:text-sm">Fullstack Developer Website.</p>
                 </div>
             </Content>
             <Content size="default" className=" my-20">
@@ -69,10 +81,11 @@ export default async function Home() {
                 <h1 className={merge('rounded bg-blue-700/30 p-2.5 text-blue-500', 'text-start font-black uppercase')}>
                     Recent Projects
                 </h1>
-                <React.Suspense fallback={<p>Loading feed...</p>}>
-                    {/* @ts-expect-error Server Component */}
-                    <LatestProject />
-                </React.Suspense>
+                <div className="grid grid-cols-1 gap-10 px-10 md:grid-cols-2">
+                    <React.Suspense fallback={<p>Loading feed...</p>}>
+                        <ProjectCard posts={latestPosts} />
+                    </React.Suspense>
+                </div>
                 <UnstyledLink href="/project" className="px-10">
                     <Button type="button" className="gap-2 px-3 py-2" color="second">
                         <span>Discover more</span>
@@ -80,6 +93,6 @@ export default async function Home() {
                     </Button>
                 </UnstyledLink>
             </section>
-        </StarsContainer>
+        </Main>
     )
 }

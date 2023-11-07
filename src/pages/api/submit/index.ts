@@ -2,8 +2,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
 
-export const runtime = 'edge'
-
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     const { name, email, message } = req.body
     const transporter = nodemailer.createTransport({
