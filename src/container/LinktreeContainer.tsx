@@ -6,7 +6,6 @@ import LottiePlayer from 'lottie-react'
 import AnimationData from '../../public/assets/lottie/astronout/astronout.json'
 import Image from 'next/image'
 import Footer from '@/components/Footer'
-import { Heading } from '@/components/ui/Heading'
 import { UnstyledLink } from '@/components/ui/link/Link'
 import { AiOutlineCode, AiOutlineMail, AiOutlineUser } from 'react-icons/ai'
 
@@ -66,7 +65,7 @@ const LinktreeContainer = () => {
                             <LottiePlayer animationData={AnimationData} />
                         </div>
                         <div className="text-center">
-                            <Heading className="text-2xl md:text-3xl">Naufal Rafianto</Heading>
+                            <h1 className="text-2xl md:text-3xl">Naufal Rafianto</h1>
                             <p>Frontend Developer | Computer Engineering Student</p>
                         </div>
                     </section>

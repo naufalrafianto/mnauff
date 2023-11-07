@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import StarsContainer from '@/container/StarsContainer'
-import { Heading } from '@/components/ui/Heading'
 import Button from '@/components/ui/button/Button'
 import toaster, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
@@ -77,7 +76,7 @@ const ContactContainer = () => {
             <Toaster position="top-center" reverseOrder={false} />
             <StarsContainer className="h-auto">
                 <div className="space-y-5">
-                    <Heading className="text-center text-3xl">Contact Me</Heading>
+                    <h1 className="text-center text-3xl">Contact Me</h1>
                     <form className="flex h-3/4 w-full flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
                         <div className="flex w-full justify-between gap-3">
                             <div className="w-1/2">
